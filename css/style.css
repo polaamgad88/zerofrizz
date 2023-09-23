@@ -411,7 +411,7 @@ ol {
 }
 
 .main-navbar {
-	background: #c8c8da;
+	background: #fff;
 }
 
 .slicknav_menu {
@@ -925,6 +925,7 @@ ol {
 	font-size: 16px;
 	color: #111111;
 	margin-bottom: 0;
+	text-align: center;
 }
 
 /* -----------------------
