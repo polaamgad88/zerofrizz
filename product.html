@@ -33,6 +33,55 @@
 </head>
 
 <body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// Get the ID from the URL parameter
+			var urlParams = new URLSearchParams(window.location.search);
+			var id = urlParams.get('id');
+			console.log('ID:', id);
+
+			// Make the AJAX request
+			$.ajax({
+				url: 'http://127.0.0.1:4000/product/find/' + id,
+				type: 'GET',
+				success: function (response) {
+					var products = response.data;
+					console.log(products);
+
+					if (products.length > 0) {
+						var product = products[0]; // Assuming the response contains an array of products and we want to update the image for the first product
+						var imagePath = product.product_image_path.replace('\\', '/');
+						imagePath = 'http://127.0.0.1:4000/' + imagePath
+						$('#product_image').attr('src', imagePath);
+						$('#product_image_1').attr('src', imagePath);
+						$('#cont_1').attr('data-imgbigurl', imagePath);
+						$('#product_image_2').attr('src', imagePath);
+						$('#cont_2').attr('data-imgbigurl', imagePath);
+						$('#product_image_3').attr('src', imagePath);
+						$('#cont_3').attr('data-imgbigurl', imagePath);
+						$('.product-big-img').attr({ src: imagePath, crossorigin: 'anonymous' });
+						$('.zoomImg').attr({ src: imagePath, crossorigin: 'anonymous' });
+						$('#title').text(product.product_name);
+						$('#description').text(product.product_description);
+					}
+					else {
+						$('.product-section').html(`<div class="section-title">
+														<h2>no product</h2>
+													</div>`)
+						$('.related-product-section').html("")
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error('Error:', error);
+					$('.product-section').html(`<div class="section-title">
+													<h2>no product</h2>
+												</div>`)
+					$('.related-product-section').html("")
+				}
+			});
+		});
+	</script>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -40,21 +89,21 @@
 
 	<!-- Header section -->
 	<header class="header-section">
-		
+
 		<nav class="main-navbar">
 			<div class="container">
-			
+
 				<!-- menu -->
 				<ul class="main-menu">
 					<li><a href="./index.html" class="site-logo">
-						<img src="img/zflogo.svg" alt="">
-					</a></li>
+							<img src="img/zflogo.svg" alt="">
+						</a></li>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="category.html">Products</a></li>
 					<li><a href="soon.html">Success story</a></li>
 					<li><a href="hair-types.html">Hair types
-						<span class="new">New</span>
-					</a></li>
+							<span class="new">New</span>
+						</a></li>
 					<li><a href="#">Products</a>
 						<ul class="sub-menu">
 							<li><a href="#">Sneakers</a></li>
@@ -62,9 +111,9 @@
 							<li><a href="#">Formal Shoes</a></li>
 							<li><a href="#">Boots</a></li>
 							<li><a href="#">Flip Flops</a></li>
-							
+
 						</ul>
-						
+
 					</li>
 					<li><a href="#">Pages</a>
 						<ul class="sub-menu">
@@ -105,35 +154,35 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="product-pic-zoom">
-						<img class="product-big-img" src="img/single-product/K Group-Current View.png" alt="">
+						<img crossorigin="anonymous" id="product_image" class="product-big-img"
+							src="img/single-product/k conditioner.png" alt="">
 					</div>
-					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+					<div class="product-thumbs" tabindex="2" style="overflow: hidden; outline: none;">
 						<div class="product-thumbs-track">
-							<div class="pt active" data-imgbigurl="img/single-product/k conditioner.png"><img
-									src="img/single-product/k conditioner.png" alt=""></div>
-							<div class="pt" data-imgbigurl="img/single-product/zero frizz Keratin Shampoo.png"><img
-									src="img/single-product/zero frizz Keratin Shampoo.png" alt=""></div>
-							<div class="pt" data-imgbigurl="img/single-product/K Group-Current View.png"><img
-									src="img/single-product/K Group-Current View.png" alt=""></div>
+							<div class="pt active" id="cont_1" data-imgbigurl="img/single-product/k conditioner.png">
+								<img crossorigin="anonymous" id="product_image_1"
+									src="img/single-product/k conditioner.png" alt="">
+							</div>
+							<div class="pt" id="cont_2"
+								data-imgbigurl="img/single-product/zero frizz Keratin Shampoo.png"><img
+									crossorigin="anonymous" id="product_image_2"
+									src="img/single-product/zero frizz Keratin Shampoo.png" alt="">
+							</div>
+							<div class="pt" id="cont_3" data-imgbigurl="img/single-product/K Group-Current View.png">
+								<img crossorigin="anonymous" id="product_image_3"
+									src="img/single-product/K Group-Current View.png" alt="">
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 product-details">
-					<h2 class="p-title">Zero Frizz Keratin Shampoo</h2>
+					<h2 class="p-title" id="title"></h2>
 					<div class="p-rating">
 						<i class="fa fa-star-o"></i>
 						<i class="fa fa-star-o"></i>
 						<i class="fa fa-star-o"></i>
 						<i class="fa fa-star-o"></i>
 						<i class="fa fa-star-o fa-fade"></i>
-					</div>
-
-
-					<div class="panel-body">
-						This frizz-taming conditioner is formulated
-						with keratin plus ceramides, proteins and vitamins to help smooth and seal the hair shaft for
-						hydrated, silky smooth results
-						<br><br>
 					</div>
 					<a href="#" class="site-btn">SHOP NOW</a>
 
@@ -147,10 +196,7 @@
 							</div>
 							<div id="collapse1" class="collapse show" aria-labelledby="headingOne"
 								data-parent="#accordion">
-								<div class="panel-body">
-									This frizz-taming conditioner is formulated with keratin plus ceramides, proteins
-									and vitamins to help smooth and seal the hair shaft for hydrated, silky smooth
-									results
+								<div class="panel-body" id="description">
 									<br><br>
 								</div>
 							</div>
@@ -216,7 +262,7 @@
 						</div>
 					</div>
 					<div class="pi-text">
-						
+
 						<p>Zero Frizz Triple Butter Conditioner </p>
 					</div>
 				</div>
@@ -230,7 +276,7 @@
 						</div>
 					</div>
 					<div class="pi-text">
-						
+
 						<p>Zero Frizz Triple Butter Conditioner</p>
 					</div>
 				</div>
@@ -243,7 +289,7 @@
 						</div>
 					</div>
 					<div class="pi-text">
-						
+
 						<p>Zero Frizz Triple Butter Conditioner</p>
 					</div>
 				</div>
@@ -256,7 +302,7 @@
 						</div>
 					</div>
 					<div class="pi-text">
-						
+
 						<p>Zero Frizz Triple Butter Conditioner </p>
 					</div>
 				</div>
@@ -269,7 +315,7 @@
 						</div>
 					</div>
 					<div class="pi-text">
-						
+
 						<p>Zero Frizz Triple Butter Conditioner </p>
 					</div>
 				</div>
@@ -291,12 +337,15 @@
 						<h2>About Zero Frizz®</h2>
 						<p>Instantly Silky, Smooth Hair
 
-							Since the mid-90s, Zero Frizz® has provided high-quality, anti-frizz performance at a savvy price alternative to higher priced brands. Zero Frizz’s Science of Smooth™ Technology smooths hair using a proprietary blend of vitamins, proteins and high-performance silicones.</p>
+							Since the mid-90s, Zero Frizz® has provided high-quality, anti-frizz performance at a savvy
+							price alternative to higher priced brands. Zero Frizz’s Science of Smooth™ Technology
+							smooths hair using a proprietary blend of vitamins, proteins and high-performance silicones.
+						</p>
 					</div>
-					
+
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					
+
 				</div>
 
 
@@ -311,7 +360,7 @@
 							<li><a href="soon.html">Key Ingrediants</a></li>
 							<li><a href="soon.html">FAQ</a></li>
 						</ul>
-						
+
 					</div>
 				</div>
 
@@ -329,26 +378,26 @@
 								Cairo, Egypt. </p>
 						</div>
 						<div class="con-info">
-							<span>    <i class="fab fa-whatsapp"></i></span>
+							<span> <i class="fab fa-whatsapp"></i></span>
 							<p>01222347852</p>
 						</div>
 
 						<div class="con-info">
 							<span><i class="fas fa-phone"></i></span>
-							<p>02 21825000  </p>
+							<p>02 21825000 </p>
 						</div>
 						<div class="con-info">
 							<span><i class="fas fa-phone"></i></span>
 							<p> 02 21825001
-								 </p>
+							</p>
 						</div>
 						<div class="con-info">
 							<span><i class="fas fa-envelope"></i></span>
 							<p> info@cristalegypt.com
-								 </p>
+							</p>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -356,16 +405,20 @@
 		<div class="social-links-warp">
 			<div class="container">
 				<div class="social-links">
-					<a href="https://www.instagram.com/zerofrizzegyptofficial/" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
-				<!--	<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a> -->
-				<!--	<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>-->
-					<a href="https://www.facebook.com/zero.frizz.egypt/" target="_blank" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
+					<a href="https://www.instagram.com/zerofrizzegyptofficial/" class="instagram"><i
+							class="fab fa-instagram"></i><span>instagram</span></a>
+					<!--	<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a> -->
+					<!--	<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>-->
+					<a href="https://www.facebook.com/zero.frizz.egypt/" target="_blank" class="facebook"><i
+							class="fab fa-facebook"></i><span>facebook</span></a>
 					<!--	<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>-->
 					<!-- <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>-->
 					<!-- <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>-->
 				</div>
 
-<p class="text-white text-center mt-5"> &copy;<script>document.write(new Date().getFullYear());</script> Gem Cosmetics </p>
+				<p class="text-white text-center mt-5"> &copy;
+					<script>document.write(new Date().getFullYear());</script> Gem Cosmetics
+				</p>
 
 			</div>
 		</div>
