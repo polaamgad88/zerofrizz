@@ -43,7 +43,7 @@
 
 			// Make the AJAX request
 			$.ajax({
-				url: 'http://127.0.0.1:4000/product/find/' + id,
+				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
 				type: 'GET',
 				success: function (response) {
 					var products = response.data;
@@ -52,7 +52,7 @@
 					if (products.length > 0) {
 						var product = products[0]; // Assuming the response contains an array of products and we want to update the image for the first product
 						var imagePath = product.product_image_path.replace('\\', '/');
-						imagePath = 'http://127.0.0.1:4000/' + imagePath
+						imagePath = 'https://gemegypt.net/gem_backend/images/' + imagePath
 						$('#product_image').attr('src', imagePath);
 						$('#product_image_1').attr('src', imagePath);
 						$('#cont_1').attr('data-imgbigurl', imagePath);
