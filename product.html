@@ -35,6 +35,7 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
+
 		$(document).ready(function () {
 			// Get the ID from the URL parameter
 			var urlParams = new URLSearchParams(window.location.search);
@@ -43,27 +44,44 @@
 
 			// Make the AJAX request
 			$.ajax({
-				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
+				url: 'http://localhost:5000/product/find/' + id,
 				type: 'GET',
 				success: function (response) {
-					var products = response.data;
-					console.log(products);
+					var product = response.data;
+					console.log(product);
 
-					if (products.length > 0) {
-						var product = products[0]; // Assuming the response contains an array of products and we want to update the image for the first product
-						var imagePath = product.product_image_path.replace('\\', '/');
-						imagePath = 'https://gemegypt.net/gem_backend/images/' + imagePath
+					if (product) {
+						var imagePath = product.image_paths[0].replace('\\', '/');
+						imagePath = 'http://localhost:5000/images/' + imagePath
 						$('#product_image').attr('src', imagePath);
-						$('#product_image_1').attr('src', imagePath);
-						$('#cont_1').attr('data-imgbigurl', imagePath);
-						$('#product_image_2').attr('src', imagePath);
-						$('#cont_2').attr('data-imgbigurl', imagePath);
-						$('#product_image_3').attr('src', imagePath);
-						$('#cont_3').attr('data-imgbigurl', imagePath);
-						$('.product-big-img').attr({ src: imagePath, crossorigin: 'anonymous' });
-						$('.zoomImg').attr({ src: imagePath, crossorigin: 'anonymous' });
+						$('.product-big-img').attr({ src: imagePath });
+						$('.zoomImg').attr({ src: imagePath });
+						var productImages = document.getElementById('product_images');
+						for (var i = 0; i < product.image_paths.length; i++) {
+							var imagePath = 'http://localhost:5000/images/' + product.image_paths[i].replace('\\', '/');
+
+							var newDiv = document.createElement('div');
+							newDiv.classList.add('pt');
+							if (i === 0) {
+								newDiv.classList.add('active');
+							}
+							newDiv.setAttribute('id', 'cont_' + (i + 1));
+							newDiv.setAttribute('data-imgbigurl', imagePath);
+
+							var newImg = document.createElement('img');
+							newImg.setAttribute('id', 'product_image_' + (i + 1));
+							newImg.setAttribute('src', imagePath);
+							newImg.setAttribute('alt', '');
+
+							newDiv.appendChild(newImg);
+
+							productImages.appendChild(newDiv);
+						}
+						$('.product-pic-zoom').zoom();
 						$('#title').text(product.product_name);
 						$('#description').text(product.product_description);
+
+
 					}
 					else {
 						$('.product-section').html(`<div class="section-title">
@@ -88,30 +106,30 @@
 	</div>
 
 	<!-- Header section -->
-<!-- Header section -->
-<header class="header-section">
+	<!-- Header section -->
+	<header class="header-section">
 
-	<nav class="main-navbar">
-		<div class="container">
+		<nav class="main-navbar">
+			<div class="container">
 
 
-			<!-- nav -->
-			<ul class="main-menu">
-				<li><a href="./index.html" class="site-logo">
-						<img src="img/zflogo.svg" alt="">
-					</a></li>
-				<li><a href="index.html" style="	margin-left: 200px;
+				<!-- nav -->
+				<ul class="main-menu">
+					<li><a href="./index.html" class="site-logo">
+							<img src="img/zflogo.svg" alt="">
+						</a></li>
+					<li><a href="index.html" style="	margin-left: 200px;
 					">Home</a></li>
-				<li><a href="category.html">Products</a></li>
-				<li><a href="hair-types.html">Hair Types</a></li>
+					<li><a href="category.html">Products</a></li>
+					<li><a href="hair-types.html">Hair Types</a></li>
 
-				<li><a href="soon.html">Success story</a></li>
-				<li><a href="key-ingrediants.html">Key Ingrediants
-					</a></li>
-				<li><a href="faq.html">FAQ
-					</a></li>
-				<li><a href="index.html"> <i class="fas fa-language"></i> </a></li>
-				<!--<li><a href="#">Products</a>p
+					<li><a href="soon.html">Success story</a></li>
+					<li><a href="key-ingrediants.html">Key Ingrediants
+						</a></li>
+					<li><a href="faq.html">FAQ
+						</a></li>
+					<li><a href="index.html"> <i class="fas fa-language"></i> </a></li>
+					<!--<li><a href="#">Products</a>p
 					<ul class="sub-menu">
 						<li><a href="#">Sneakers</a></li>
 						<li><a href="#">Sandals</a></li>
@@ -132,11 +150,11 @@
 					</ul>
 				</li>
 				<li><a href="#">Blog</a></li>-->
-			</ul>
-		</div>
-	</nav>
-</header>
-<!-- Header section end -->
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- Header section end -->
 
 
 	<!-- Header section end -->
@@ -164,25 +182,10 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="product-pic-zoom">
-						<img crossorigin="anonymous" id="product_image" class="product-big-img"
-							src="img/single-product/k conditioner.png" alt="">
+						<img id="product_image" class="product-big-img" src="" alt="">
 					</div>
 					<div class="product-thumbs" tabindex="2" style="overflow: hidden; outline: none;">
-						<div class="product-thumbs-track">
-							<div class="pt active" id="cont_1" data-imgbigurl="img/single-product/k conditioner.png">
-								<img crossorigin="anonymous" id="product_image_1"
-									src="img/single-product/k conditioner.png" alt="">
-							</div>
-							<div class="pt" id="cont_2"
-								data-imgbigurl="img/single-product/zero frizz Keratin Shampoo.png"><img
-									crossorigin="anonymous" id="product_image_2"
-									src="img/single-product/zero frizz Keratin Shampoo.png" alt="">
-							</div>
-							<div class="pt" id="cont_3" data-imgbigurl="img/single-product/K Group-Current View.png">
-								<img crossorigin="anonymous" id="product_image_3"
-									src="img/single-product/K Group-Current View.png" alt="">
-							</div>
-						</div>
+						<div id="product_images" class="product-thumbs-track"></div>
 					</div>
 				</div>
 				<div class="col-lg-6 product-details">

@@ -32,11 +32,11 @@ $(window).on('load', function () {
 	/*------------------
 		ScrollBar
 	--------------------*/
-	$(".cart-table-warp, .product-thumbs").niceScroll({
-		cursorborder: "",
-		cursorcolor: "#afafaf",
-		boxzoom: false
-	});
+	// $(".cart-table-warp, .product-thumbs").niceScroll({
+	// 	cursorborder: "",
+	// 	cursorcolor: "#afafaf",
+	// 	boxzoom: false
+	// });
 
 
 	/*------------------
@@ -206,19 +206,15 @@ $(window).on('load', function () {
 	/*------------------
 		Single Product
 	--------------------*/
-	$('.product-thumbs-track > .pt').on('click', function () {
-		$('.product-thumbs-track .pt').removeClass('active');
+	$('.product-thumbs-track').on('click', '.pt', function () {
+		//$('#product_image').css('max-height', $('#product_image').height());
+		$('.product-thumbs-track > .pt').removeClass('active');
 		$(this).addClass('active');
 		var imgurl = $(this).data('imgbigurl');
 		$('.product-big-img').attr({ src: imgurl });
-		$('.zoomImg').attr({ src: imgurl, crossorigin: 'anonymous' });
+		$('.zoomImg').attr({ src: imgurl });
+		$('.product-pic-zoom').zoom();
 	});
-
-
-	$('.product-pic-zoom').zoom();
-
-
-
 })(jQuery);
 function openModal(dialogId) {
 	document.getElementById(dialogId).classList.add('show');
