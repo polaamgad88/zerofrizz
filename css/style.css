@@ -1541,7 +1541,7 @@ ol {
 
 .product-thumbs .pt {
 	width: 116px;
-	height: 116px;
+	/* height: 116px; */
 	float: left;
 	margin-right: 31px;
 	overflow: hidden;

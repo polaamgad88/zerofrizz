@@ -37,12 +37,10 @@
 	<script>
 
 		$(document).ready(function () {
-			// Get the ID from the URL parameter
 			var urlParams = new URLSearchParams(window.location.search);
 			var id = urlParams.get('id');
 			console.log('ID:', id);
 
-			// Make the AJAX request
 			$.ajax({
 				url: 'http://localhost:5000/product/find/' + id,
 				type: 'GET',
@@ -80,8 +78,6 @@
 						$('.product-pic-zoom').zoom();
 						$('#title').text(product.product_name);
 						$('#description').text(product.product_description);
-
-
 					}
 					else {
 						$('.product-section').html(`<div class="section-title">
@@ -97,7 +93,19 @@
 												</div>`)
 					$('.related-product-section').html("")
 				}
-			});
+			}).then(() => {
+				$(".product-thumbs").niceScroll({
+					cursorborder: "",
+					cursorcolor: "#afafaf",
+					boxzoom: false
+				});
+
+				setTimeout(function () {
+					$(".product-thumbs").getNiceScroll().resize();
+				}, 1000);
+
+			})
+
 		});
 	</script>
 	<!-- Page Preloder -->

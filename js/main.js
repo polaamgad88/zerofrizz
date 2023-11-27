@@ -37,8 +37,7 @@ $(window).on('load', function () {
 	// 	cursorcolor: "#afafaf",
 	// 	boxzoom: false
 	// });
-
-
+	
 	/*------------------
 		Category menu
 	--------------------*/
@@ -213,7 +212,7 @@ $(window).on('load', function () {
 		var imgurl = $(this).data('imgbigurl');
 		$('.product-big-img').attr({ src: imgurl });
 		$('.zoomImg').attr({ src: imgurl });
-		$('.product-pic-zoom').zoom();
+		//$('.product-pic-zoom').zoom(); this line couses the error ,, why ? 
 	});
 })(jQuery);
 function openModal(dialogId) {
