@@ -59,7 +59,9 @@
 							var aText = $('<a href="./article' + article.id + '.html" style="text-align: center; display: block;"></a>');
 							var piTextDiv = $('<div class="pi-text"></div>');
 							var h5 = $('<h5 style="margin: 0;">' + article.title + '</h5>');
+							var p = $('<p>' + article.brief + '</p>');
 							piTextDiv.append(h5);
+							piTextDiv.append(p);
 							aText.append(piTextDiv);
 
 							productItemDiv.append(piPicDiv);
