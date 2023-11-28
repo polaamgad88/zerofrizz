@@ -38,7 +38,7 @@
 	<script>
 		$(document).ready(function () {
 			$.ajax({
-				url: 'http://192.168.1.4:5000/products/website/zerofrizz',
+				url: 'https://gemegypt.net/gem_backend/products/website/zerofrizz',
 				type: 'GET',
 				success: function (response) {
 					var productList = $('#productList');
@@ -53,7 +53,7 @@
 				<div class="col-lg-3 col-sm-6">
 					<div class="product-item">
 						<div class="pi-pic">`+
-								'<a href="./product.html?id=' + product.id + '"><img src="http://192.168.1.4:5000/images/' + imagePath + '" alt="' + product.product_name + '"></a>' +
+								'<a href="./product.html?id=' + product.id + '"><img src="https://gemegypt.net/gem_backend/images/' + imagePath + '" alt="' + product.product_name + '"></a>' +
 								`<div class="pi-links">
 								<a href="./product.html?id=` + product.id + `" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 							</div>

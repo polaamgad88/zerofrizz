@@ -42,7 +42,7 @@
 			console.log('ID:', id);
 
 			$.ajax({
-				url: 'http://localhost:5000/product/find/' + id,
+				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
 				type: 'GET',
 				success: function (response) {
 					var product = response.data;
@@ -50,13 +50,13 @@
 
 					if (product) {
 						var imagePath = product.image_paths[0].replace('\\', '/');
-						imagePath = 'http://localhost:5000/images/' + imagePath
+						imagePath = 'https://gemegypt.net/gem_backend/images/' + imagePath
 						$('#product_image').attr('src', imagePath);
 						$('.product-big-img').attr({ src: imagePath });
 						$('.zoomImg').attr({ src: imagePath });
 						var productImages = document.getElementById('product_images');
 						for (var i = 0; i < product.image_paths.length; i++) {
-							var imagePath = 'http://localhost:5000/images/' + product.image_paths[i].replace('\\', '/');
+							var imagePath = 'https://gemegypt.net/gem_backend/images/' + product.image_paths[i].replace('\\', '/');
 
 							var newDiv = document.createElement('div');
 							newDiv.classList.add('pt');
