@@ -427,6 +427,10 @@ ol {
 
 .main-menu {
 	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	list-style-type: none;
 
 }
 
@@ -2920,4 +2924,22 @@ ol {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+}
+
+.left-item {
+	margin-right: auto;
+}
+
+/* Default styles for the right items */
+.right-items {
+	display: flex;
+	align-items: center;
+}
+
+/* Media query for mobile devices (max-width: 768px) */
+@media only screen and (max-width: 768px) {
+	.right-items {
+		display: contents;
+		align-items: center;
+	}
 }

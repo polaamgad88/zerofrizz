@@ -567,14 +567,14 @@ pre code {
 }
 
 .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 3%;
+    padding-left: 3%;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
 }
 
-@media (min-width:576px) {
+
+/* @media (min-width:576px) {
     .container {
         max-width: 540px
     }
@@ -584,9 +584,9 @@ pre code {
     .container {
         max-width: 720px
     }
-}
+} */
 
-@media (min-width:992px) {
+/* @media (min-width:992px) {
     .container {
         max-width: 960px
     }
@@ -596,7 +596,7 @@ pre code {
     .container {
         max-width: 1140px
     }
-}
+} */
 
 .container-fluid {
     width: 100%;
