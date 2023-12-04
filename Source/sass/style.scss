@@ -703,7 +703,7 @@ ol {
 .feature {
 	text-align: center;
 	background: #f8f8f8;
-	height: 100%;
+	// height: 100%;
 	&:nth-child(2) {
 		background: $color;
 		h2 {
@@ -722,7 +722,6 @@ ol {
 		-webkit-box-pack: center;
 		-ms-flex-pack: center;
 		justify-content: center;
-		height: 100%;
 	}
 	.feature-icon {
 		display: inline-block;
