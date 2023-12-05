@@ -627,9 +627,9 @@ ol {
 }
 
 .hero-slider .slider-nav-warp {
-	max-width: 1145px;
+	text-align-last: center;
 	bottom: 0;
-	margin: -78px auto 0;
+	filter: invert(1);
 }
 
 .hero-slider .slider-nav {
@@ -763,6 +763,8 @@ ol {
 	text-align: center;
 	background: #f8f8f8;
 	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .feature:nth-child(2) {
@@ -2247,9 +2249,6 @@ ol {
 /* Medium screen : 992px. */
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.hero-slider .slider-nav-warp {
-		max-width: 930px;
-	}
 
 	.footer-widget ul {
 		margin-right: 5px;
@@ -2287,9 +2286,6 @@ ol {
 		margin-right: 30px;
 	}
 
-	.hero-slider .slider-nav-warp {
-		max-width: 690px;
-	}
 
 	.hero-slider .hs-item .offer-card {
 		top: 20px;
@@ -2375,9 +2371,6 @@ ol {
 		margin-left: 5px;
 	}
 
-	.hero-slider .slider-nav-warp {
-		max-width: 510px;
-	}
 
 	.hero-slider .hs-item h2 {
 		font-size: 30px;
@@ -2445,9 +2438,6 @@ ol {
 /* Medium Mobile :480px. */
 
 @media only screen and (min-width: 576px) and (max-width: 766px) {
-	.hero-slider .slider-nav-warp {
-		padding: 0 15px;
-	}
 
 	.banner .tag-new {
 		position: relative;
@@ -2461,10 +2451,6 @@ ol {
 /* Small Mobile :320px. */
 
 @media only screen and (max-width: 479px) {
-	.hero-slider .slider-nav-warp {
-		max-width: 510px;
-		padding: 0 15px;
-	}
 
 	.hero-slider .hs-item h2 {
 		font-size: 35px;
@@ -2975,6 +2961,7 @@ ol {
 	.banner {
 		height: 400px;
 	}
+
 	.text-overlay span {
 		font-size: 14px;
 	}
@@ -3016,6 +3003,7 @@ ol {
 	.banner {
 		height: 230px;
 	}
+
 	.text-overlay span {
 		font-size: 10px;
 	}
@@ -3023,4 +3011,44 @@ ol {
 	.text-overlay h2 {
 		font-size: 20px;
 	}
+}
+
+/* Styles for larger screens */
+.carousel-item {
+	display: flex;
+	position: relative;
+	/* Other styles... */
+}
+
+.carousel-image {
+	position: relative;
+	display: inline-block;
+}
+
+.carousel-image img {
+	max-width: 100%;
+	/* Ensure images are responsive */
+	height: auto;
+	display: block;
+	/* Other image styles... */
+}
+
+.carousel-content {
+	width: 40%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+	text-align: justify;
+	color: white;
+	padding: 20px;
+	background-color: transparent;
+}
+
+.carousel-content h2 {
+	font-size: 2.6vw;
+	margin-bottom: 10px;
+}
+
+.carousel-content p {
+	font-size: 1.8vw;
+	margin: 0;
 }

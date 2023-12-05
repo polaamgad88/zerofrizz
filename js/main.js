@@ -74,8 +74,8 @@ $(window).on('load', function () {
 		animateOut: 'fadeOut',
 		animateIn: 'fadeIn',
 		navText: ['<i class="flaticon-left-arrow-1"></i>', '<i class="flaticon-right-arrow-1"></i>'],
-		smartSpeed: 1200,
-		autoHeight: false,
+		smartSpeed: 1400,
+		autoHeight: true,
 		autoplay: true,
 		onInitialized: function () {
 			var a = this.items().length;
