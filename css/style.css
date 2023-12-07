@@ -516,18 +516,6 @@ ol {
 /* ----------------
   Features
 ---------------------*/
-
-.hero-section {
-	padding-bottom: 54px;
-}
-
-
-
-
-
-
-
-
 .hero-slider .hs-item {
 	position: relative;
 	height: 720px;
@@ -995,7 +983,6 @@ ol {
 
 .banner {
 	width: 100%;
-	/* Ensure the image takes full width */
 	height: 500px;
 	padding: 50px 90px 47px;
 	position: relative;
@@ -2987,7 +2974,7 @@ ol {
 
 @media screen and (max-width: 600px) {
 	.banner {
-		height: 270px;
+		height: 260px;
 	}
 
 	.text-overlay span {
@@ -3001,7 +2988,7 @@ ol {
 
 @media screen and (max-width: 480px) {
 	.banner {
-		height: 230px;
+		height: 215px;
 	}
 
 	.text-overlay span {
@@ -3010,6 +2997,20 @@ ol {
 
 	.text-overlay h2 {
 		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 380px) {
+	.banner {
+		height: 155px;
+	}
+
+	.text-overlay span {
+		font-size: 8px;
+	}
+
+	.text-overlay h2 {
+		font-size: 14px;
 	}
 }
 
@@ -3027,19 +3028,16 @@ ol {
 
 .carousel-image img {
 	max-width: 100%;
-	/* Ensure images are responsive */
 	height: auto;
 	display: block;
-	/* Other image styles... */
 }
 
 .carousel-content {
-	width: 40%;
+	width: 37%;
 	transform: translate(-50%, -50%);
 	text-align: left;
-	text-align: justify;
 	color: white;
-	padding: 20px;
+	padding: 10px;
 	background-color: transparent;
 }
 
@@ -3051,4 +3049,5 @@ ol {
 .carousel-content p {
 	font-size: 1.8vw;
 	margin: 0;
+	line-height: 1;
 }
