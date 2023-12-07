@@ -3014,11 +3014,9 @@ ol {
 	}
 }
 
-/* Styles for larger screens */
 .carousel-item {
 	display: flex;
 	position: relative;
-	/* Other styles... */
 }
 
 .carousel-image {
@@ -3035,7 +3033,6 @@ ol {
 .carousel-content {
 	width: 37%;
 	transform: translate(-50%, -50%);
-	text-align: left;
 	color: white;
 	padding: 10px;
 	background-color: transparent;

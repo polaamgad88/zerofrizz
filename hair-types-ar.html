@@ -13,13 +13,6 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 
-	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
-	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -39,6 +32,53 @@
 </head>
 
 <body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$.ajax({
+				url: 'https://gemegypt.net/gem_backend/articles/website/zerofrizz',
+				type: 'GET',
+				success: function (response) {
+					var articlesRow = $('#articles');
+					var articles = response.articles;
+
+					if (articles.length === 0) {
+						articlesRow.append('<p>No articles available.</p>');
+					} else {
+						articles.forEach(function (article) {
+							var articleImgPath = article.image.replace('\\', '/');
+							var colDiv = $('<div class="col-lg-4 col-sm-6"></div>');
+							var productItemDiv = $('<div class="product-item"></div>');
+							var piPicDiv = $('<div class="pi-pic"></div>');
+							var aImg = $('<a href="./article.html?id=' + article.id + '"></a>');
+							var img = $('<img src="https://gemegypt.net/gem_backend/images_articles/' + articleImgPath + '" alt="' + article.title + '">');
+							aImg.append(img);
+							piPicDiv.append(aImg);
+
+							var aText = $('<a href="./article' + article.id + '.html" style="text-align: center; display: block;"></a>');
+							var piTextDiv = $('<div class="pi-text"></div>');
+							var h5 = $('<h5 style="margin: 0;">' + article.title + '</h5>');
+							var p = $('<p>' + article.brief + '</p>');
+							piTextDiv.append(h5);
+							piTextDiv.append(p);
+							aText.append(piTextDiv);
+
+							productItemDiv.append(piPicDiv);
+							productItemDiv.append(aText);
+							colDiv.append(productItemDiv);
+
+							articlesRow.append(colDiv);
+						});
+					}
+				},
+				error: function (xhr, status, error) {
+					$('#articles').append('<p>Could not find any articles.</p>');
+				}
+			});
+		});
+
+	</script>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -65,9 +105,29 @@
 						<li><a href="soon.html">Success story</a></li>
 						<li><a href="key-ingrediants.html">Key Ingrediants</a></li>
 						<li><a href="faq.html">FAQ</a></li>
-						<li><a href="faq-ar.html"> <i class="fas fa-language"></i> </a></li>
+						<li><a href="index.html"> <i class="fas fa-language"></i> </a></li>
 					</div>
-
+					<!--<li><a href="#">Products</a>p
+						<ul class="sub-menu">
+							<li><a href="#">Sneakers</a></li>
+							<li><a href="#">Sandals</a></li>
+							<li><a href="#">Formal Shoes</a></li>
+							<li><a href="#">Boots</a></li>
+							<li><a href="#">Flip Flops</a></li>
+							
+						</ul>
+						
+					</li>
+					<li><a href="#">Pages</a>
+						<ul class="sub-menu">
+							<li><a href="./product.html">Product Page</a></li>
+							<li><a href="./category.html">Category Page</a></li>
+							<li><a href="./cart.html">Cart Page</a></li>
+							<li><a href="./checkout.html">Checkout Page</a></li>
+							<li><a href="./contact.html">Contact Page</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Blog</a></li>-->
 				</ul>
 			</div>
 		</nav>
@@ -80,185 +140,28 @@
 		<div class="container">
 			<div class="site-pagination">
 				<a href="index.html">Home</a> /
-				<a href="faq.html">FAQ</a> /
+				<a href="hair-types.html">Hair Types</a> /
 			</div>
 		</div>
 	</div>
 	<!-- Page info end -->
 
-	<br>
-	<h2 style="text-align: center; padding-top: 30px;"> F.A.Q</h2><br>
+	<h4 style="text-align: center; padding-top: 30px;"> FEATURED ARTICLES</h4>
+	<!-- Category section -->
+	<section class="category-section spad">
+		<div class="container">
+
+
+			<div class="col-lg-12  order-1 order-lg-2 mb-5 mb-lg-0">
 
 
 
-	<!-- FAQ section -->
-	<section id="faq">
-
-		<body>
-			<div class="wrapper">
-				<div class="faq">
-					<button class="accordion">
-						What is the difference between the keratin set and the triple butter set?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p>
-							<br>
-							Keratin set (shampoo, conditioner and serum)
-							for curly, coarse and tangled hair.
-							<br>
-							Enriched with vitamins, proteins and ceramides.
-							Provides hair softness and moisture. 
-							<br>
-							<br>
-							Triple Butter Set (Shampoo, conditioner and serum)
-							for dry, damaged and curly hair.
-							<br>
-							The Shampoo is Sulfate Free which is excellent for dyed and treated hair. 
-							<br>
-							Enriched with a triple butter complex: shea butter, mango and copacu.
-							Helps to repair damaged hair, reduces hair loss, nourishes hair and reduces wrinkles.
-
-
-						</p>
-					</div>
-				</div>
-
-				<div class="faq">
-					<button class="accordion">
-						What is the difference between keratin serum and triple butter serum? <i
-							class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							Keratin serum
-							Suitable for curly, coarse and tangled hair. <br>
-							Enriched with vitamins, proteins and ceramides.
-							The serum protects hair from sun ultraviolet rays.
-							<br><br>
-							Triple Butter Serum:
-							Suitable for dry and damaged curly hair.<br>
-							Enriched with a triple butter complex: shea, mango and copacu.
-							The serum protects hair from sun ultraviolet rays.
-						</p>
-					</div>
-				</div>
-
-				<div class="faq">
-					<button class="accordion">
-						Does our products contain Silicone? <i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							It contains little amount of silicone that
-							is approved internationally to provide hair with softness,<br> retain moisture
-							inside the hair, reduce frizz, and enhance shine.
-						</p>
-					</div>
-				</div>
-
-				<div class="faq">
-					<button class="accordion">
-						Can we use the serum with heat (Dryer and hair straightener)?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							The serum can be used to protect hair from heat damage.<br>
-							Also protects against harmful sunlight.
-						</p>
-					</div>
-				</div>
-
-				<div class="faq">
-					<button class="accordion">
-						Is it suitable for weak and falling hair?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							Zero Frizz products are not suitable for thin, weak or oily hair.
-
-						</p>
-					</div>
-				</div>
-
-				<div class="faq">
-					<button class="accordion">
-						What is the best way to use serum?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							Place a small amount of serum on the palm of the hand, then put it on the wet hair to
-							ends.<br>
-							The serum should not be used on the scalp.
-
-						</p>
-					</div>
-				</div>
-
-
-				<div class="faq">
-					<button class="accordion">
-						Is it suitable for treated and dyed hair?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							The Triple Butter set is suitable for treated and dyed hair because it is sulfate free.
-
-
-						</p>
-					</div>
-				</div>
-
-
-
-
-				<div class="faq">
-					<button class="accordion">
-						Is it suitable for children?
-						<i class="fa-solid fa-chevron-down"></i>
-					</button>
-					<div class="pannel">
-						<p><br>
-							Our products are suitable for children over three years old.
-						</p>
-					</div>
-				</div>
-
-
-				<br><br>
-
+				<div id="articles" class="row"></div>
 			</div>
-
-			<script>
-				var acc = document.getElementsByClassName("accordion");
-				var i;
-
-				for (i = 0; i < acc.length; i++) {
-					acc[i].addEventListener("click", function () {
-						this.classList.toggle("active");
-						this.parentElement.classList.toggle("active");
-
-						var pannel = this.nextElementSibling;
-
-						if (pannel.style.display === "block") {
-							pannel.style.display = "none";
-						} else {
-							pannel.style.display = "block";
-						}
-					});
-				}
-			</script>
-		</body>
-
-
+		</div>
+		</div>
 	</section>
-
-
-	<!-- FAQ section end -->
+	<!-- Category section end -->
 
 
 	<!-- Footer section -->

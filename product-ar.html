@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<title>Zero Frizz</title>
+	<meta charset="UTF-8">
+	<meta name="description" content=" Zero Frizz">
+	<meta name="keywords" content="divisima, eCommerce, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="img/zero frizz new-03.png" rel="shortcut icon" />
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/flaticon.css" />
+	<link rel="stylesheet" href="css/slicknav.min.css" />
+	<link rel="stylesheet" href="css/jquery-ui.min.css" />
+	<link rel="stylesheet" href="css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="css/animate.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+
+		$(document).ready(function () {
+			var urlParams = new URLSearchParams(window.location.search);
+			var id = urlParams.get('id');
+			console.log('ID:', id);
+
+			$.ajax({
+				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
+				type: 'GET',
+				success: function (response) {
+					var product = response.data;
+					console.log(product);
+
+					if (product) {
+						var imagePath = product.image_paths[0].replace('\\', '/');
+						imagePath = 'https://gemegypt.net/gem_backend/images/' + imagePath
+						$('#product_image').attr('src', imagePath);
+						$('.product-big-img').attr({ src: imagePath });
+						$('.zoomImg').attr({ src: imagePath });
+						var productImages = document.getElementById('product_images');
+						for (var i = 0; i < product.image_paths.length; i++) {
+							var imagePath = 'https://gemegypt.net/gem_backend/images/' + product.image_paths[i].replace('\\', '/');
+
+							var newDiv = document.createElement('div');
+							newDiv.classList.add('pt');
+							if (i === 0) {
+								newDiv.classList.add('active');
+							}
+							newDiv.setAttribute('id', 'cont_' + (i + 1));
+							newDiv.setAttribute('data-imgbigurl', imagePath);
+
+							var newImg = document.createElement('img');
+							newImg.setAttribute('id', 'product_image_' + (i + 1));
+							newImg.setAttribute('src', imagePath);
+							newImg.setAttribute('alt', '');
+
+							newDiv.appendChild(newImg);
+
+							productImages.appendChild(newDiv);
+						}
+						$('.product-pic-zoom').zoom();
+						$('#title').text(product.product_name);
+						$('#description').text(product.product_description);
+					}
+					else {
+						$('.product-section').html(`<div class="section-title">
+														<h2>no product</h2>
+													</div>`)
+						$('.related-product-section').html("")
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error('Error:', error);
+					$('.product-section').html(`<div class="section-title">
+													<h2>no product</h2>
+												</div>`)
+					$('.related-product-section').html("")
+				}
+			}).then(() => {
+				$(".product-thumbs").niceScroll({
+					cursorborder: "",
+					cursorcolor: "#afafaf",
+					boxzoom: false
+				});
+
+				setTimeout(function () {
+					$(".product-thumbs").getNiceScroll().resize();
+				}, 1000);
+
+			})
+
+		});
+	</script>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<!-- Header section -->
+	<header class="header-section">
+
+		<nav class="main-navbar">
+			<div class="container">
+
+
+				<!-- nav -->
+				<ul class="main-menu">
+					<li class="left-item">
+						<a href="./index.html" class="site-logo">
+							<img src="img/zflogo.svg" alt="">
+						</a>
+					</li>
+					<div class="right-items">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="category.html">Products</a></li>
+						<li><a href="hair-types.html">Hair Types</a></li>
+						<li><a href="soon.html">Success story</a></li>
+						<li><a href="key-ingrediants.html">Key Ingrediants</a></li>
+						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="index.html"> <i class="fas fa-language"></i> </a></li>
+					</div>
+					<!--<li><a href="#">Products</a>p
+					<ul class="sub-menu">
+						<li><a href="#">Sneakers</a></li>
+						<li><a href="#">Sandals</a></li>
+						<li><a href="#">Formal Shoes</a></li>
+						<li><a href="#">Boots</a></li>
+						<li><a href="#">Flip Flops</a></li>
+						
+					</ul>
+					
+				</li>
+				<li><a href="#">Pages</a>
+					<ul class="sub-menu">
+						<li><a href="./product.html">Product Page</a></li>
+						<li><a href="./category.html">Category Page</a></li>
+						<li><a href="./cart.html">Cart Page</a></li>
+						<li><a href="./checkout.html">Checkout Page</a></li>
+						<li><a href="./contact.html">Contact Page</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Blog</a></li>-->
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- Header section end -->
+
+
+	<!-- Header section end -->
+
+
+	<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4>Category PAge</h4>
+			<div class="site-pagination">
+				<a href="">Home</a> /
+				<a href="">Shop</a>
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- product section -->
+	<section class="product-section">
+		<div class="container">
+			<div class="back-link">
+				<a href="./category.html"> &lt;&lt; Back to Category</a>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="product-pic-zoom">
+						<img id="product_image" class="product-big-img" src="" alt="">
+					</div>
+					<div class="product-thumbs" tabindex="2" style="overflow: hidden; outline: none;">
+						<div id="product_images" class="product-thumbs-track"></div>
+					</div>
+				</div>
+				<div class="col-lg-6 product-details">
+					<h2 class="p-title" id="title"></h2>
+					<div class="p-rating">
+						<i class="fa fa-star-o"></i>
+						<i class="fa fa-star-o"></i>
+						<i class="fa fa-star-o"></i>
+						<i class="fa fa-star-o"></i>
+						<i class="fa fa-star-o fa-fade"></i>
+					</div>
+					<a href="#" class="site-btn">SHOP NOW</a>
+
+					<div id="accordion" class="accordion-area">
+
+						<div class="panel">
+							<div class="panel-header" id="headingOne">
+								<button class="panel-link active" data-toggle="collapse" data-target="#collapse1"
+									aria-expanded="true" aria-controls="collapse1">description</button>
+
+							</div>
+							<div id="collapse1" class="collapse show" aria-labelledby="headingOne"
+								data-parent="#accordion">
+								<div class="panel-body" id="description">
+									<br><br>
+								</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-header" id="headingTwo">
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse2"
+									aria-expanded="false" aria-controls="collapse2">How to Use </button>
+							</div>
+							<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+								<div class="panel-body">
+									<img src="./img/cards.png" alt="">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so
+										dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te
+										mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-header" id="headingThree">
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse3"
+									aria-expanded="false" aria-controls="collapse3">size</button>
+							</div>
+							<div id="collapse3" class="collapse" aria-labelledby="headingThree"
+								data-parent="#accordion">
+								<div class="panel-body">
+									<h4>7 Days Returns</h4>
+									<p>Cash on Delivery Available<br>Home Delivery <span>3 - 4 days</span></p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so
+										dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te
+										mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="social-sharing">
+						<a href=""><i class="fa fa-google-plus"></i></a>
+						<a href=""><i class="fa fa-pinterest"></i></a>
+						<a href=""><i class="fa fa-facebook"></i></a>
+						<a href=""><i class="fa fa-twitter"></i></a>
+						<a href=""><i class="fa fa-youtube"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- product section end -->
+
+
+	<!-- RELATED PRODUCTS section -->
+	<section class="related-product-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>RELATED PRODUCTS</h2>
+			</div>
+			<div class="product-slider owl-carousel">
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="./img/product/k conditioner.png" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+
+						<p>Zero Frizz Triple Butter Conditioner </p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<div class="tag-new">New</div>
+						<img src="./img/product/k serum.png" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+
+						<p>Zero Frizz Triple Butter Conditioner</p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="./img/product/k shampoo.png" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+
+						<p>Zero Frizz Triple Butter Conditioner</p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="./img/product/k shampoo.png" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+
+						<p>Zero Frizz Triple Butter Conditioner </p>
+					</div>
+				</div>
+				<div class="product-item">
+					<div class="pi-pic">
+						<img src="./img/product/k serum.png" alt="">
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						</div>
+					</div>
+					<div class="pi-text">
+
+						<p>Zero Frizz Triple Butter Conditioner </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- RELATED PRODUCTS section end -->
+
+
+	<!-- Footer section -->
+	<section class="footer-section">
+		<div class="container">
+			<!--<div class="footer-logo ">
+				<a href="#"><img src="./img/zero frizz new-02.png" alt=""></a>
+			</div>-->
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget about-widget">
+						<h2>About Zero Frizz®</h2>
+						<p>Instantly Silky, Smooth Hair
+
+							Since the mid-90s, Zero Frizz® has provided high-quality, anti-frizz performance at a savvy
+							price alternative to higher priced brands. Zero Frizz’s Science of Smooth™ Technology
+							smooths hair using a proprietary blend of vitamins, proteins and high-performance silicones.
+						</p>
+					</div>
+
+				</div>
+				<div class="col-lg-3 col-sm-6">
+
+				</div>
+
+
+
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget about-widget">
+						<h2>Important Links</h2>
+						<ul>
+							<li><a href="soon.html">Products</a></li>
+							<li><a href="soon.html">Hair Types</a></li>
+							<li><a href="soon.html">Success Story</a></li>
+							<li><a href="soon.html">Key Ingrediants</a></li>
+							<li><a href="soon.html">FAQ</a></li>
+						</ul>
+
+					</div>
+				</div>
+
+
+
+
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget contact-widget">
+						<h2>Questions</h2>
+						<div class="con-info">
+							<span><i class="fas fa-map-marker-alt"></i></span>
+							<p>4 E Asmaa Fahmy,
+								Ard El Golf, Heliopolis,
+								Pharma Plaza Build
+								Cairo, Egypt. </p>
+						</div>
+						<div class="con-info">
+							<span> <i class="fab fa-whatsapp"></i></span>
+							<p>01222347852</p>
+						</div>
+
+						<div class="con-info">
+							<span><i class="fas fa-phone"></i></span>
+							<p>02 21825000 </p>
+						</div>
+						<div class="con-info">
+							<span><i class="fas fa-phone"></i></span>
+							<p> 02 21825001
+							</p>
+						</div>
+						<div class="con-info">
+							<span><i class="fas fa-envelope"></i></span>
+							<p> info@cristalegypt.com
+							</p>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="social-links-warp">
+			<div class="container">
+				<div class="social-links">
+					<a href="https://www.instagram.com/zerofrizzegyptofficial/" class="instagram"><i
+							class="fab fa-instagram"></i><span>instagram</span></a>
+					<!--	<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a> -->
+					<!--	<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>-->
+					<a href="https://www.facebook.com/zero.frizz.egypt/" target="_blank" class="facebook"><i
+							class="fab fa-facebook"></i><span>facebook</span></a>
+					<!--	<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>-->
+					<!-- <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>-->
+					<!-- <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>-->
+				</div>
+
+				<p class="text-white text-center mt-5"> &copy;
+					<script>document.write(new Date().getFullYear());</script> Gem Cosmetics
+				</p>
+
+			</div>
+		</div>
+	</section>
+	<!-- Footer section end -->
+
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.nicescroll.min.js"></script>
+	<script src="js/jquery.zoom.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>
