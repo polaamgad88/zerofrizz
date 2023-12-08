@@ -23,12 +23,9 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css" />
 	<link rel="stylesheet" href="css/animate.css" />
 	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 </head>
 
@@ -40,6 +37,10 @@
 			var urlParams = new URLSearchParams(window.location.search);
 			var id = urlParams.get('id');
 			console.log('ID:', id);
+			var languageLink = document.getElementById('languageLink');
+			if (id) {
+				languageLink.href = 'product-ar.html?id=' + id;
+			}
 
 			$.ajax({
 				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
@@ -135,7 +136,7 @@
 						<li><a href="soon.html">Success story</a></li>
 						<li><a href="key-ingrediants.html">Key Ingrediants</a></li>
 						<li><a href="faq.html">FAQ</a></li>
-						<li><a href="index-ar.html"> <i class="fas fa-language"></i> </a></li>
+						<li><a id="languageLink" href="product-ar.html"> <i class="fas fa-language"></i> </a></li>
 					</div>
 				</ul>
 			</div>
