@@ -29,6 +29,20 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
+		var url = 'https://gemegypt.net/gem_backend/products/website/zerofrizz'
+		const selectedCat = true;
+		const selectedSet = true;
+		const queryParams = [];
+
+		if (selectedCat) {
+			queryParams.push("category=test");
+		}
+
+		if (selectedSet) {
+			queryParams.push("product_set=jell");
+		}
+
+		url += queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
 		$(document).ready(function () {
 			$.ajax({
 				url: 'https://gemegypt.net/gem_backend/products/website/zerofrizz',
@@ -119,7 +133,29 @@
 	<section class="category-section spad">
 		<div class="container">
 			<div class="row">
+				<!-- <div class="col-lg-3 order-2 order-lg-1">
+					<div class="filter-widget">
+						<h2 class="fw-title">Categories</h2>
+						<ul class="category-menu">
+							<li><a href="#">Shampoo</a></li>
+							<li><a href="#">Conditioner</a></li>
 
+							<li><a href="#">Hair Mask</a></li>
+							<li><a href="#">Serum</a></li>
+						</ul>
+					</div>
+
+					<div class="filter-widget">
+						<h2 class="fw-title">Set</h2>
+						<ul class="category-menu">
+							<li><a href="#">Keratin <span>(4)</span></a></li>
+							<li><a href="#">Triple Butter<span>(4)</span></a></li>
+							<li><a href="#">Makademia<span>(4)</span></a></li>
+							<li><a href="#">Argan<span>(4)</span></a></li>
+
+						</ul>
+					</div>
+				</div> -->
 				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
 					<div class="row" id="productList"></div>
 				</div>

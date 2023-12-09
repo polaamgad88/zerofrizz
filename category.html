@@ -31,8 +31,22 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function () {
+			var url = 'https://gemegypt.net/gem_backend/products/website/zerofrizz'
+			const selectedCat = true;
+			const selectedSet = true;
+			const queryParams = [];
+
+			if (selectedCat) {
+				queryParams.push("category=test");
+			}
+
+			if (selectedSet) {
+				queryParams.push("product_set=jell");
+			}
+
+			url += queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
 			$.ajax({
-				url: 'https://gemegypt.net/gem_backend/products/website/zerofrizz',
+				url: url,
 				type: 'GET',
 				success: function (response) {
 					var productList = $('#productList');
