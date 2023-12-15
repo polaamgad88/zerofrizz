@@ -52,14 +52,14 @@
 							var productItemDiv = $('<div class="product-item"></div>');
 							var piPicDiv = $('<div class="pi-pic"></div>');
 							var aImg = $('<a href="./article.html?id=' + article.id + '"></a>');
-							var img = $('<img src="https://gemegypt.net/gem_backend/images_articles/' + articleImgPath + '" alt="' + article.title + '">');
+							var img = $('<img src="https://gemegypt.net/gem_backend/images_articles/' + articleImgPath + '" alt="' + article.title_ar + '">');
 							aImg.append(img);
 							piPicDiv.append(aImg);
 
 							var aText = $('<a href="./article' + article.id + '.html" style="text-align: center; display: block;"></a>');
 							var piTextDiv = $('<div class="pi-text"></div>');
-							var h5 = $('<h5 style="margin: 0;">' + article.title + '</h5>');
-							var p = $('<p>' + article.brief + '</p>');
+							var h5 = $('<h5 style="margin: 0;">' + article.title_ar + '</h5>');
+							var p = $('<p>' + article.brief_ar + '</p>');
 							piTextDiv.append(h5);
 							piTextDiv.append(p);
 							aText.append(piTextDiv);

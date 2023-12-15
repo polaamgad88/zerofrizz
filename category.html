@@ -30,26 +30,25 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-		$(document).ready(function () {
-			var url = 'https://gemegypt.net/gem_backend/products/website/zerofrizz'
-			const selectedCat = true;
-			const selectedSet = true;
+		function loadProducts(selectedCategory, selectedSet) {
+			var url = 'https://gemegypt.net/gem_backend/products?website=zerofrizz';
 			const queryParams = [];
 
-			if (selectedCat) {
-				queryParams.push("category=test");
+			if (selectedCategory) {
+				queryParams.push("category=" + selectedCategory);
 			}
 
 			if (selectedSet) {
-				queryParams.push("product_set=jell");
+				queryParams.push("product_set=" + selectedSet);
 			}
 
-			url += queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
+			url += queryParams.length > 0 ? `&${queryParams.join("&")}` : "";
 			$.ajax({
 				url: url,
 				type: 'GET',
 				success: function (response) {
 					var productList = $('#productList');
+					productList.empty();
 					var products = response.data;
 					console.log(products)
 					if (products.length === 0) {
@@ -58,29 +57,69 @@
 						products.forEach(function (product) {
 							var imagePath = product.images[0].replace('\\', '/');
 							var listItem = `
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">`+
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">`+
 								'<a href="./product.html?id=' + product.id + '"><img src="https://gemegypt.net/gem_backend/images/' + imagePath + '" alt="' + product.product_name + '"></a>' +
 								`<div class="pi-links">
-								<a href="./product.html?id=` + product.id + `" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							</div>
-						</div>` +
+                                        <a href="./product.html?id=` + product.id + `" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                    </div>
+                                </div>` +
 								'<div class="pi-text">' +
 								'<p>' + product.product_name + '</p>'
 							productList.append(listItem);
 						});
-						productList.append(`
-                      </div>
-                    </div>
-                </div>`);
+						productList.append(`</div></div></div>`);
 					}
 				},
 				error: function (xhr, status, error) {
-					$('#productList').append('<p>Could not find any products.</p>');
+					var productList = $('#productList');
+					productList.empty();
+					$('#productList').html('<p>Could not find any products.</p>');
 				}
 			});
+		}
+
+		$(document).ready(function () {
+			loadProducts();
+			$('#category_menu a').on('click', function (e) {
+				e.preventDefault();
+				var selectedCategory = $(this).text().trim();
+				var selectedSet = null;
+
+				// Check which menu was clicked and set the selectedCategory or selectedSet
+				if ($(this).parent().parent().attr('id') === 'category_menu') {
+					selectedSet = $('.category-menu#set_menu li a.active').text().trim();
+				} else if ($(this).parent().parent().attr('id') === 'set_menu') {
+					selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
+				}
+
+				// Remove active class from all links and add it to the clicked link
+				$(this).addClass('active').parent().siblings().find('a').removeClass('active');
+
+				// Call loadProducts function with selected category and set
+				loadProducts(selectedCategory, selectedSet);
+			});
+			$('#set_menu a').on('click', function (e) {
+				e.preventDefault();
+				var selectedSet = $(this).text().trim();
+				var selectedCategory = null;
+
+				// Check which menu was clicked and set the selectedCategory or selectedSet
+				if ($(this).parent().parent().attr('id') === 'category_menu') {
+					selectedSet = $('.category-menu#set_menu li a.active').text().trim();
+				} else if ($(this).parent().parent().attr('id') === 'set_menu') {
+					selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
+				}
+
+				// Remove active class from all links and add it to the clicked link
+				$(this).addClass('active').parent().siblings().find('a').removeClass('active');
+
+				// Call loadProducts function with selected category and set
+				loadProducts(selectedCategory, selectedSet);
+			});
 		});
+
 	</script>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -135,29 +174,28 @@
 		<div class="container">
 			<div class="row">
 
-				<!-- <div class="col-lg-3 order-2 order-lg-1">
+				<div class="col-lg-3 order-2 order-lg-1">
 					<div class="filter-widget">
 						<h2 class="fw-title">Categories</h2>
-						<ul class="category-menu">
-							<li><a href="#">Shampoo</a></li>
-							<li><a href="#">Conditioner</a></li>
-
-							<li><a href="#">Hair Mask</a></li>
-							<li><a href="#">Serum</a></li>
+						<ul id="category_menu" class="category-menu">
+							<li><a href="">Shampoo</a></li>
+							<li><a href="">Conditioner</a></li>
+							<li><a href="">Hair Mask</a></li>
+							<li><a href="">Serum</a></li>
 						</ul>
 					</div>
 
 					<div class="filter-widget">
 						<h2 class="fw-title">Set</h2>
-						<ul class="category-menu">
-							<li><a href="#">Keratin <span>(4)</span></a></li>
-							<li><a href="#">Triple Butter<span>(4)</span></a></li>
-							<li><a href="#">Makademia<span>(4)</span></a></li>
-							<li><a href="#">Argan<span>(4)</span></a></li>
+						<ul id="set_menu" class="category-menu">
+							<li><a href="">Keratine</a></li>
+							<li><a href="">Triple Butter</a></li>
+							<li><a href="">Makademia</a></li>
+							<li><a href="">Argan</a></li>
 
 						</ul>
 					</div>
-				</div> -->
+				</div>
 
 				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
 					<div class="row" id="productList"></div>
