@@ -82,42 +82,39 @@
 
 		$(document).ready(function () {
 			loadProducts();
-			$('#category_menu a').on('click', function (e) {
+			$('.category-menu li a').on('click', function (e) {
 				e.preventDefault();
-				var selectedCategory = $(this).text().trim();
-				var selectedSet = null;
-
-				// Check which menu was clicked and set the selectedCategory or selectedSet
-				if ($(this).parent().parent().attr('id') === 'category_menu') {
-					selectedSet = $('.category-menu#set_menu li a.active').text().trim();
-				} else if ($(this).parent().parent().attr('id') === 'set_menu') {
-					selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
+				var $this = $(this);
+				var $parentLi = $this.parent();
+				if ($this.hasClass('active')) {
+					$this.removeClass('active');
+					$parentLi.removeClass('active');
+					var selectedCategory = null;
+					var selectedSet = null;
+					if ($parentLi.parent().attr('id') === 'category_menu') {
+						selectedSet = $('.category-menu#set_menu li a.active').text().trim();
+						loadProducts(null, selectedSet);
+					} else if ($parentLi.parent().attr('id') === 'set_menu') {
+						selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
+						loadProducts(selectedCategory, null);
+					}
+				} else {
+					var selectedCategory = null;
+					var selectedSet = null;
+					if ($parentLi.parent().attr('id') === 'category_menu') {
+						selectedCategory = $this.text().trim();
+						selectedSet = $('.category-menu#set_menu li a.active').text().trim();
+					} else if ($parentLi.parent().attr('id') === 'set_menu') {
+						selectedSet = $this.text().trim();
+						selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
+					}
+					$this.addClass('active').parent().addClass('active').siblings().removeClass('active').find('a').removeClass('active');
+					loadProducts(selectedCategory, selectedSet);
 				}
-
-				// Remove active class from all links and add it to the clicked link
-				$(this).addClass('active').parent().siblings().find('a').removeClass('active');
-
-				// Call loadProducts function with selected category and set
-				loadProducts(selectedCategory, selectedSet);
 			});
-			$('#set_menu a').on('click', function (e) {
-				e.preventDefault();
-				var selectedSet = $(this).text().trim();
-				var selectedCategory = null;
 
-				// Check which menu was clicked and set the selectedCategory or selectedSet
-				if ($(this).parent().parent().attr('id') === 'category_menu') {
-					selectedSet = $('.category-menu#set_menu li a.active').text().trim();
-				} else if ($(this).parent().parent().attr('id') === 'set_menu') {
-					selectedCategory = $('.category-menu#category_menu li a.active').text().trim();
-				}
 
-				// Remove active class from all links and add it to the clicked link
-				$(this).addClass('active').parent().siblings().find('a').removeClass('active');
 
-				// Call loadProducts function with selected category and set
-				loadProducts(selectedCategory, selectedSet);
-			});
 		});
 
 	</script>

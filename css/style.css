@@ -1295,12 +1295,15 @@ ol {
 	border-radius: 50%;
 }
 
-.category-menu li a:hover {
+.category-menu li a.active {
 	color: #3e79c5;
 }
 
-.category-menu li a:hover:after {
+.category-menu li a.active:after {
 	background: #3e79c5;
+}
+.category-menu li a:hover {
+	background: #8daed7;
 }
 
 .category-menu li a:last-child a {
@@ -1311,31 +1314,22 @@ ol {
 	list-style: none;
 	overflow: hidden;
 	height: 0;
-	-webkit-transform: rotateX(90deg);
 	transform: rotateX(90deg);
 	opacity: 0;
-	-webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
-	transition: opacity 0.4s, -webkit-transform 0.4s;
-	-o-transition: transform 0.4s, opacity 0.4s;
 	transition: transform 0.4s, opacity 0.4s;
-	transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
 }
 
 .category-menu li .sub-menu li a {
 	padding-left: 45px;
 }
 
-.category-menu li:hover>a {
-	color: #3e79c5;
-}
-
 .category-menu li.active>.sub-menu {
 	display: block;
 	height: auto;
 	opacity: 1;
-	-webkit-transform: rotateX(0deg);
 	transform: rotateX(0deg);
 }
+
 
 .price-range-wrap .price-range {
 	border-radius: 0;
@@ -2829,10 +2823,10 @@ ol {
 
 }
 
-.active,
+/* .active,
 .accordion:hover {
 	background-color: #8daed7;
-}
+} */
 
 .pannel {
 	padding: 0 2rem 2.5rem 2rem;
