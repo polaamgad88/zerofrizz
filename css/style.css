@@ -2854,18 +2854,24 @@ ol {
 .dialog {
 	display: none;
 	position: fixed;
-	top: 10vh;
-	left: 10vw;
-	width: 80vw;
-	height: 50vh;
+	top: 5%;
+    left: 4%;
+    width: 92%;
+	height: 55vh;
 	border: 1px solid #eee;
 	border-radius: 4px;
 	padding: 10px;
 	text-align: center;
 	z-index: 1;
 	background-color: #fff;
+	place-content: center;
 }
-
+@media only screen and (max-width: 768px) {
+    .dialog {
+        height: 92%;
+        place-content: start;
+    }
+}
 
 .dialog-content {
 	display: flex;
