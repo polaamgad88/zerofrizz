@@ -1329,6 +1329,31 @@ ol {
 	opacity: 1;
 	transform: rotateX(0deg);
 }
+/* For mobile devices */
+@media only screen and (max-width: 820px) {
+    .order-lg-1,
+    .order-lg-2 {
+        order: 3; /* Change the order for both columns */
+    }
+
+    .col-lg-3 {
+        width: 100%;
+        margin-bottom: 20px; /* Add some space between the elements */
+    }
+
+    #category_menu,
+    #set_menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #category_menu li,
+    #set_menu li {
+        width: 50%; /* Make each list item occupy 50% of the width */
+        text-align: center;
+    }
+}
 
 
 .price-range-wrap .price-range {
