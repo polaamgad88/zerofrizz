@@ -30,6 +30,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		function loadProducts(selectedCategory, selectedSet) {
+			var loader = $('#product_loader');
+    		loader.show();
 			var url = 'https://gemegypt.net/gem_backend/products?website=zerofrizz';
 			const queryParams = [];
 
@@ -46,6 +48,7 @@
 				url: url,
 				type: 'GET',
 				success: function (response) {
+					loader.hide();
 					var productList = $('#productList');
 					productList.empty();
 					var products = response.data;
@@ -74,6 +77,7 @@
 				error: function (xhr, status, error) {
 					var productList = $('#productList');
 					productList.empty();
+					loader.hide();
 					$('#productList').html('<p>Could not find any products.</p>');
 				}
 			});
@@ -192,6 +196,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+					<div class="product_loader" id="product_loader"></div>
 					<div class="row" id="productList"></div>
 				</div>
 			</div>
