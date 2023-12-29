@@ -31,8 +31,10 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		function loadProducts(selectedCategory, selectedSet) {
+			var productList = $('#productList');
+			productList.empty();
 			var loader = $('#product_loader');
-    		loader.show();
+			loader.show();
 			var url = 'https://gemegypt.net/gem_backend/products?website=zerofrizz';
 			const queryParams = [];
 
@@ -199,9 +201,9 @@
 				</div>
 
 				<div class="col-lg-9  order-2 order-lg-2 mb-5 mb-lg-0">
-					<div class="product_loader" id="product_loader"></div>
 					<div class="row" id="productList">
 					</div>
+					<div class="product_loader" id="product_loader"></div>
 				</div>
 			</div>
 		</div>
