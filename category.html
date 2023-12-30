@@ -96,9 +96,11 @@
 				var menu_checker = $('#' + set); // Use '#' to select by ID
 				menu_checker.parent().addClass('active');
 				menu_checker.addClass('active');
-
 			}
-			loadProducts(null, set.replace('_' , " "));
+			if (set)
+				loadProducts(null, set.replace('_', " "));
+			else
+				loadProducts()
 			$('.category-menu li a').on('click', function (e) {
 				e.preventDefault();
 				var $this = $(this);
