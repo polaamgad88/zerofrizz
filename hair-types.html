@@ -33,7 +33,7 @@
 	<script>
 		$(document).ready(function () {
 			$.ajax({
-				url: 'https://gemegypt.net/gem_backend/articles/website/zerofrizz',
+				url: 'https://zerofrizz.co.uk/api/articles/website/zerofrizz',
 				type: 'GET',
 				success: function (response) {
 					var articlesRow = $('#articles');
@@ -48,7 +48,7 @@
 							var productItemDiv = $('<div class="product-item"></div>');
 							var piPicDiv = $('<div class="pi-pic"></div>');
 							var aImg = $('<a href="./article.html?id=' + article.id + '"></a>');
-							var img = $('<img src="https://gemegypt.net/gem_backend/images_articles/' + articleImgPath + '" alt="' + article.title + '">');
+							var img = $('<img src="https://zerofrizz.co.uk/api/images_articles/' + articleImgPath + '" alt="' + article.title + '">');
 							aImg.append(img);
 							piPicDiv.append(aImg);
 

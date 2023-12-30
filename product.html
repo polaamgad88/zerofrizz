@@ -43,7 +43,7 @@
 			}
 
 			$.ajax({
-				url: 'https://gemegypt.net/gem_backend/product/find/' + id,
+				url: 'https://zerofrizz.co.uk/api/product/find/' + id,
 				type: 'GET',
 				success: function (response) {
 					var product = response.data;
@@ -51,13 +51,13 @@
 
 					if (product) {
 						var imagePath = product.image_paths[0].replace('\\', '/');
-						imagePath = 'https://gemegypt.net/gem_backend/images/' + imagePath
+						imagePath = 'https://zerofrizz.co.uk/api/images/' + imagePath
 						$('#product_image').attr('src', imagePath);
 						$('.product-big-img').attr({ src: imagePath });
 						$('.zoomImg').attr({ src: imagePath });
 						var productImages = document.getElementById('product_images');
 						for (var i = 0; i < product.image_paths.length; i++) {
-							var imagePath = 'https://gemegypt.net/gem_backend/images/' + product.image_paths[i].replace('\\', '/');
+							var imagePath = 'https://zerofrizz.co.uk/api/images/' + product.image_paths[i].replace('\\', '/');
 
 							var newDiv = document.createElement('div');
 							newDiv.classList.add('pt');

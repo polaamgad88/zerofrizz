@@ -42,7 +42,7 @@
 				currentLink.href = 'article.html?id=' + id;
 			}
 			$.ajax({
-				url: 'https://gemegypt.net/gem_backend/article/find/' + id,
+				url: 'https://zerofrizz.co.uk/api/article/find/' + id,
 				type: 'GET',
 				success: function (response) {
 					var articleDataDiv = $('#article-data-div');
@@ -56,7 +56,7 @@
 
 						articleData.forEach(function (item, index) {
 							var div = $('<div style="padding-top: 30px; width: 100%;"></div>');
-							var img = $('<img src="https://gemegypt.net/gem_backend/images_articles/' + item.image_path + '" alt="' + (item.title + '-' + (index + 1)) + '">');
+							var img = $('<img src="https://zerofrizz.co.uk/api/images_articles/' + item.image_path + '" alt="' + (item.title + '-' + (index + 1)) + '">');
 							img.css({
 								width: '730px',
 								marginBottom: '20px'

@@ -34,7 +34,7 @@
 			productList.empty();
 			var loader = $('#product_loader');
 			loader.show();
-			var url = 'https://gemegypt.net/gem_backend/products?website=zerofrizz';
+			var url = 'https://zerofrizz.co.uk/api/products?website=zerofrizz';
 			const queryParams = [];
 
 			if (selectedCategory) {
@@ -64,7 +64,7 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="product-item">
                                 <div class="pi-pic">`+
-								'<a href="./product-ar.html?id=' + product.id + '"><img src="https://gemegypt.net/gem_backend/images/' + imagePath + '" alt="' + product.product_name_ar + '"></a>' +
+								'<a href="./product-ar.html?id=' + product.id + '"><img src="https://zerofrizz.co.uk/api/images/' + imagePath + '" alt="' + product.product_name_ar + '"></a>' +
 								`<div class="pi-links">
                                         <a href="./product-ar.html?id=` + product.id + `" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                                     </div>
@@ -86,7 +86,17 @@
 		}
 
 		$(document).ready(function () {
-			loadProducts();
+			var urlParams = new URLSearchParams(window.location.search);
+			var set = urlParams.get('set');
+			console.log('set:', set);
+			var languageLink = document.getElementById('languageLink');
+			if (set) {
+				languageLink.href = 'category-ar.html?set=' + set;
+				var menu_checker = $('#' + set); // Use '#' to select by ID
+				menu_checker.parent().addClass('active');
+				menu_checker.addClass('active');
+			}
+			loadProducts(null, set.replace('_' , " "));
 			$('.category-menu li a').on('click', function (e) {
 				e.preventDefault();
 				var $this = $(this);
@@ -149,7 +159,7 @@
 						<li><a href="soon-ar.html">Success story</a></li>
 						<li><a href="key-ingrediants-ar.html">Key Ingrediants</a></li>
 						<li><a href="faq-ar.html">FAQ</a></li>
-						<li><a href="category.html"> <i class="fas fa-language"></i> </a></li>
+						<li><a id="languageLink" href="category.html"> <i class="fas fa-language"></i> </a></li>
 					</div>
 				</ul>
 			</div>
@@ -190,10 +200,10 @@
 					<div class="filter-widget">
 						<h2 class="fw-title">Set</h2>
 						<ul id="set_menu" class="category-menu">
-							<li><a href="">Keratine</a></li>
-							<li><a href="">Triple Butter</a></li>
-							<li><a href="">Makademia</a></li>
-							<li><a href="">Argan</a></li>
+							<li><a id="Keratine" href="">Keratine</a></li>
+							<li><a id="Triple_Butter" href="">Triple Butter</a></li>
+							<li><a id="Macademia" href="">Macademia</a></li>
+							<li><a id="Argan" href="">Argan</a></li>
 
 						</ul>
 					</div>
