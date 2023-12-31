@@ -104,8 +104,8 @@ ol {
 }
 
 .spad {
-	padding-top: 105px;
-	padding-bottom: 105px;
+	padding-top: 55px;
+	padding-bottom: 55px;
 }
 
 .text-white h1,
@@ -1278,7 +1278,7 @@ ol {
 ------------------*/
 
 .filter-widget {
-	margin-bottom: 100px;
+	margin-bottom: 20px;
 }
 
 .filter-widget .fw-title {
@@ -1319,6 +1319,7 @@ ol {
 
 .category-menu li a.active {
 	color: #3e79c5;
+	font-weight: bold;
 }
 
 .category-menu li a.active:after {
@@ -1355,6 +1356,10 @@ ol {
     .col-lg-3 {
         width: 100%;
         margin-bottom: 20px;
+    }
+	.col-lg-4 {
+        width: 50%;
+        margin-bottom: 10px;
     }
 
     #category_menu,
