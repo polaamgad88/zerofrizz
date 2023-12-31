@@ -442,7 +442,6 @@ ol {
 .main-navbar {
 	background: #fff;
 }
-
 .slicknav_menu {
 	display: none;
 }
@@ -2304,7 +2303,7 @@ ol {
 	.main-menu {
 		text-align: center;
 	}
-
+	
 	.sub-menu {
 		text-align: left;
 	}
@@ -2375,7 +2374,9 @@ ol {
 	.main-menu {
 		display: none;
 	}
-
+	.main-navbar{
+		background-color: #bbbbbc;
+	}
 	.slicknav_btn {
 		background-color: #bbbbbc;
 	}
@@ -2465,7 +2466,9 @@ ol {
 /* Medium Mobile :480px. */
 
 @media only screen and (min-width: 576px) and (max-width: 766px) {
-
+	.main-navbar{
+		background-color: #bbbbbc;
+	}
 	.banner .tag-new {
 		position: relative;
 		display: inline-block;
@@ -2478,7 +2481,9 @@ ol {
 /* Small Mobile :320px. */
 
 @media only screen and (max-width: 479px) {
-
+	.main-navbar{
+		background-color: #bbbbbc;
+	}
 	.hero-slider .hs-item h2 {
 		font-size: 35px;
 		margin-top: 220px;
