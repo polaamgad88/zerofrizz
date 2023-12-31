@@ -9,7 +9,7 @@
 'use strict';
 
 
-$(window).on('load', function () {
+$(window).on('DOMContentLoaded', function () {
 	/*------------------
 		Preloder
 	--------------------*/

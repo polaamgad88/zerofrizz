@@ -2729,7 +2729,7 @@ ol {
 	}
 
 	.bal-container {
-		height: 250px;
+		height: 450px;
 	}
 
 }
@@ -2749,7 +2749,7 @@ ol {
 	}
 
 	.bal-container {
-		height: 200px;
+		height: 400px;
 	}
 
 }
@@ -2769,7 +2769,7 @@ ol {
 	}
 
 	.bal-container {
-		height: 300px;
+		height: 500px;
 	}
 
 }
@@ -3073,10 +3073,12 @@ ol {
 .carousel-image {
 	position: relative;
 	display: inline-block;
+	width:-webkit-fill-available;
 }
 
 .carousel-image img {
 	max-width: 100%;
+
 	height: auto;
 	display: block;
 }
