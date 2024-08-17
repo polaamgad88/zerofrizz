@@ -109,6 +109,8 @@
           }, 1000);
         });
         function add_owlCarousel() {
+          var owl = $(".product-slider");
+          owl.trigger("destroy.owl.carousel");
           $(".product-slider").owlCarousel({
             loop: true,
             nav: true,
@@ -176,6 +178,7 @@
                 });
                 related_products_list.append(`</div></div></div>`);
               }
+              add_owlCarousel();
             },
             error: function (xhr, status, error) {
               var related_products_list = $("#related_products_list");
@@ -184,9 +187,6 @@
               $("#related_products_list").html(
                 "<p>Could not find any related products.</p>"
               );
-            },
-            complete: function () {
-              add_owlCarousel();
             },
           });
         }
