@@ -164,21 +164,22 @@
                 products = products.slice(0, 5);
                 products.forEach(function (product) {
                   var listItem =
-                    `
-                            <div class="product-item">
+                    `<a href="product.html?id=` +
+                    product.id +
+                    `"><div class="product-item">
                                 <div class="pi-pic">` +
                     '<img src="https://zerofrizz.co.uk/api/images/' +
                     product.image_path +
                     '" alt="' +
-                    product.product_name_ar +
+                    product.product_name +
                     `"></div>` +
                     '<div class="pi-text">' +
                     "<p>" +
-                    product.product_name_ar +
+                    product.product_name +
                     "</p>";
                   related_products_list.append(listItem);
                 });
-                related_products_list.append(`</div></div></div>`);
+                related_products_list.append(`</div></div></div></a>`);
               }
               add_owlCarousel();
             },
