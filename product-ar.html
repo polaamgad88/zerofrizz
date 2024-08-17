@@ -110,6 +110,89 @@
             $(".product-thumbs").getNiceScroll().resize();
           }, 1000);
         });
+        function add_owlCarousel() {
+          $(".product-slider").owlCarousel({
+            loop: true,
+            nav: true,
+            dots: false,
+            margin: 30,
+            autoplay: true,
+            navText: [
+              '<i class="flaticon-left-arrow-1"></i>',
+              '<i class="flaticon-right-arrow-1"></i>',
+            ],
+            responsive: {
+              0: {
+                items: 1,
+              },
+              480: {
+                items: 2,
+              },
+              768: {
+                items: 3,
+              },
+              1200: {
+                items: 4,
+              },
+            },
+          });
+        }
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        function loadProducts() {
+          var related_products_list = $("#related_products_list");
+          related_products_list.empty();
+          var url = "https://zerofrizz.co.uk/api/products?website=zerofrizz";
+          $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+              var related_products_list = $("#related_products_list");
+              related_products_list.empty();
+              var products = response.data;
+              if (products.length === 0) {
+                related_products_list.append("<p>No products available.</p>");
+              } else {
+                products = shuffleArray(products);
+                products = products.slice(0, 5);
+                products.forEach(function (product) {
+                  var listItem =
+                    `
+                            <div class="product-item">
+                                <div class="pi-pic">` +
+                    '<img src="https://zerofrizz.co.uk/api/images/' +
+                    product.image_path +
+                    '" alt="' +
+                    product.product_name_ar +
+                    `"></div>` +
+                    '<div class="pi-text">' +
+                    "<p>" +
+                    product.product_name_ar +
+                    "</p>";
+                  related_products_list.append(listItem);
+                });
+                related_products_list.append(`</div></div></div>`);
+              }
+            },
+            error: function (xhr, status, error) {
+              var related_products_list = $("#related_products_list");
+              related_products_list.empty();
+              loader.hide();
+              $("#related_products_list").html(
+                "<p>Could not find any related products.</p>"
+              );
+            },
+            complete: function () {
+              add_owlCarousel();
+            },
+          });
+        }
+        loadProducts();
       });
     </script>
     <!-- Page Preloder -->
@@ -231,15 +314,8 @@
         <div class="section-title">
           <h2>منتجات مشابهة</h2>
         </div>
-        <div class="product-slider owl-carousel">
-          <div class="product-item">
-            <div class="pi-pic">
-              <img src="./img/product/k conditioner.png" alt="" />
-            </div>
-            <div class="pi-text">
-              <p>Zero Frizz Triple Butter Conditioner</p>
-            </div>
-          </div>
+        <div id="related_products_list" class="product-slider owl-carousel">
+          <!-- list related products here -->
         </div>
       </div>
     </section>
