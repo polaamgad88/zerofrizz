@@ -1,244 +1,244 @@
 <!DOCTYPE html>
 <html lang="zxx">
+  <head>
+    <title>Zerofrizz</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content=" Divisima | eCommerce Template" />
+    <meta name="keywords" content="divisima, eCommerce, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
+    <link href="img/zero frizz new-02.png" rel="shortcut icon" />
 
-<head>
-	<title>Zerofrizz</title>
-	<meta charset="UTF-8">
-	<meta name="description" content=" Divisima | eCommerce Template">
-	<meta name="keywords" content="divisima, eCommerce, creative, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->
-	<link href="img/zero frizz new-02.png" rel="shortcut icon" />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i"
+      rel="stylesheet"
+    />
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
 
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/font-awesome.min.css" />
-	<link rel="stylesheet" href="css/flaticon.css" />
-	<link rel="stylesheet" href="css/slicknav.min.css" />
-	<link rel="stylesheet" href="css/jquery-ui.min.css" />
-	<link rel="stylesheet" href="css/owl.carousel.min.css" />
-	<link rel="stylesheet" href="css/animate.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "https://zerofrizz.co.uk/api/articles/website/zerofrizz",
+          type: "GET",
+          success: function (response) {
+            var articlesRow = $("#articles");
+            var articles = response.articles;
 
-</head>
+            if (articles.length === 0) {
+              articlesRow.append("<p>No articles available.</p>");
+            } else {
+              articles.forEach(function (article) {
+                var articleImgPath = article.image.replace("\\", "/");
+                var colDiv = $('<div class="col-lg-4 col-sm-6"></div>');
+                var productItemDiv = $('<div class="product-item"></div>');
+                var piPicDiv = $('<div class="pi-pic"></div>');
+                var aImg = $(
+                  '<a href="./article.html?id=' + article.id + '"></a>'
+                );
+                var img = $(
+                  '<img src="https://zerofrizz.co.uk/api/images_articles/' +
+                    articleImgPath +
+                    '" alt="' +
+                    article.title +
+                    '">'
+                );
+                aImg.append(img);
+                piPicDiv.append(aImg);
 
-<body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                var aText = $(
+                  '<a href="./article' +
+                    article.id +
+                    '.html" style="text-align: center; display: block;"></a>'
+                );
+                var piTextDiv = $('<div class="pi-text"></div>');
+                var h5 = $('<h5 style="margin: 0;">' + article.title + "</h5>");
+                var p = $("<p>" + article.brief + "</p>");
+                piTextDiv.append(h5);
+                piTextDiv.append(p);
+                aText.append(piTextDiv);
 
-	<script>
-		$(document).ready(function () {
-			$.ajax({
-				url: 'https://zerofrizz.co.uk/api/articles/website/zerofrizz',
-				type: 'GET',
-				success: function (response) {
-					var articlesRow = $('#articles');
-					var articles = response.articles;
+                productItemDiv.append(piPicDiv);
+                productItemDiv.append(aText);
+                colDiv.append(productItemDiv);
 
-					if (articles.length === 0) {
-						articlesRow.append('<p>No articles available.</p>');
-					} else {
-						articles.forEach(function (article) {
-							var articleImgPath = article.image.replace('\\', '/');
-							var colDiv = $('<div class="col-lg-4 col-sm-6"></div>');
-							var productItemDiv = $('<div class="product-item"></div>');
-							var piPicDiv = $('<div class="pi-pic"></div>');
-							var aImg = $('<a href="./article.html?id=' + article.id + '"></a>');
-							var img = $('<img src="https://zerofrizz.co.uk/api/images_articles/' + articleImgPath + '" alt="' + article.title + '">');
-							aImg.append(img);
-							piPicDiv.append(aImg);
+                articlesRow.append(colDiv);
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            $("#articles").append("<p>Could not find any articles.</p>");
+          },
+        });
+      });
+    </script>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
 
-							var aText = $('<a href="./article' + article.id + '.html" style="text-align: center; display: block;"></a>');
-							var piTextDiv = $('<div class="pi-text"></div>');
-							var h5 = $('<h5 style="margin: 0;">' + article.title + '</h5>');
-							var p = $('<p>' + article.brief + '</p>');
-							piTextDiv.append(h5);
-							piTextDiv.append(p);
-							aText.append(piTextDiv);
+    <!-- Header section -->
+    <header class="header-section">
+      <nav class="main-navbar">
+        <div class="container">
+          <!-- nav -->
+          <ul class="main-menu">
+            <li class="left-item">
+              <a href="./index.html" class="site-logo">
+                <img src="img/zflogo.svg" alt="" />
+              </a>
+            </li>
+            <div class="right-items">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="category.html">Products</a></li>
+              <li><a href="hair-types.html">Hair Types</a></li>
+              <li><a href="soon.html">About Us</a></li>
+              <li><a href="key-ingrediants.html">Key Ingrediants</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li>
+                <a href="hair-types-ar.html">
+                  <i class="fas fa-language"></i>
+                </a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Header section end -->
 
-							productItemDiv.append(piPicDiv);
-							productItemDiv.append(aText);
-							colDiv.append(productItemDiv);
+    <!-- Page info -->
+    <div class="page-top-info">
+      <div class="container">
+        <div class="site-pagination">
+          <a href="index.html">Home</a> /
+          <a href="hair-types.html">Hair Types</a> /
+        </div>
+      </div>
+    </div>
+    <!-- Page info end -->
 
-							articlesRow.append(colDiv);
-						});
-					}
-				},
-				error: function (xhr, status, error) {
-					$('#articles').append('<p>Could not find any articles.</p>');
-				}
-			});
-		});
+    <h4 style="text-align: center; padding-top: 30px">FEATURED ARTICLES</h4>
+    <!-- Category section -->
+    <section class="category-section spad">
+      <div class="container">
+        <div class="col-lg-12 order-1 order-lg-2 mb-5 mb-lg-0">
+          <div id="articles" class="row"></div>
+        </div>
+      </div>
+    </section>
+    <!-- Category section end -->
 
-	</script>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+    <!-- Footer section -->
+    <section class="footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>About Zero Frizz®</h2>
+              <p>
+                Instantly Silky, Smooth Hair Since the mid-90s, Zero Frizz® has
+                provided high-quality, anti-frizz performance at a savvy price
+                alternative to higher priced brands. Zero Frizz’s Science of
+                Smooth™ Technology smooths hair using a proprietary blend of
+                vitamins, proteins and high-performance silicones.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6"></div>
 
-	<!-- Header section -->
-	<header class="header-section">
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>Important Links</h2>
+              <ul>
+                <li><a href="category.html">Products</a></li>
+                <li><a href="hair-types.html">Hair Types</a></li>
+                <li><a href="soon.html">About Us</a></li>
+                <li><a href="key-ingrediants.html">Key Ingrediants</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </div>
+          </div>
 
-		<nav class="main-navbar">
-			<div class="container">
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget contact-widget">
+              <h2>Questions</h2>
+              <div class="con-info">
+                <span><i class="fas fa-map-marker-alt"></i></span>
+                <p>
+                  4 E Asmaa Fahmy, Ard El Golf, Heliopolis, Pharma Plaza Build
+                  Cairo, Egypt.
+                </p>
+              </div>
+              <div class="con-info">
+                <span> <i class="fab fa-whatsapp"></i></span>
+                <p>+447454008814</p>
+              </div>
+              <div class="con-info">
+                <span> <i class="fab fa-whatsapp"></i></span>
+                <p>+971505606483</p>
+              </div>
 
+              <div class="con-info">
+                <span><i class="fas fa-envelope"></i></span>
+                <p>Info@zerofrizz.co.uk</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="social-links-warp">
+        <div class="container">
+          <div class="social-links">
+            <a
+              href="https://www.instagram.com/zerofrizzegyptofficial/"
+              class="instagram"
+              ><i class="fab fa-instagram"></i><span>instagram</span></a
+            >
+            <a
+              href="https://www.facebook.com/zero.frizz.egypt/"
+              target="_blank"
+              class="facebook"
+              ><i class="fab fa-facebook"></i><span>facebook</span></a
+            >
+          </div>
 
-				<!-- nav -->
-				<ul class="main-menu">
-					<li class="left-item">
-						<a href="./index.html" class="site-logo">
-							<img src="img/zflogo.svg" alt="">
-						</a>
-					</li>
-					<div class="right-items">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="category.html">Products</a></li>
-						<li><a href="hair-types.html">Hair Types</a></li>
-						<li><a href="soon.html">About Us</a></li>
-						<li><a href="key-ingrediants.html">Key Ingrediants</a></li>
-						<li><a href="faq.html">FAQ</a></li>
-						<li><a href="hair-types-ar.html"> <i class="fas fa-language"></i> </a></li>
-					</div>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<!-- Header section end -->
+          <p class="text-white text-center mt-5">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Footer section end -->
 
-
-	<!-- Page info -->
-	<div class="page-top-info">
-		<div class="container">
-			<div class="site-pagination">
-				<a href="index.html">Home</a> /
-				<a href="hair-types.html">Hair Types</a> /
-			</div>
-		</div>
-	</div>
-	<!-- Page info end -->
-
-	<h4 style="text-align: center; padding-top: 30px;"> FEATURED ARTICLES</h4>
-	<!-- Category section -->
-	<section class="category-section spad">
-		<div class="container">
-
-
-			<div class="col-lg-12  order-1 order-lg-2 mb-5 mb-lg-0">
-
-
-
-				<div id="articles" class="row"></div>
-			</div>
-		</div>
-		</div>
-	</section>
-	<!-- Category section end -->
-
-
-	<!-- Footer section -->
-	<section class="footer-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget">
-						<h2>About Zero Frizz®</h2>
-						<p>Instantly Silky, Smooth Hair
-
-							Since the mid-90s, Zero Frizz® has provided high-quality, anti-frizz performance at a savvy
-							price alternative to higher priced brands. Zero Frizz’s Science of Smooth™ Technology
-							smooths hair using a proprietary blend of vitamins, proteins and high-performance silicones.
-						</p>
-					</div>
-
-				</div>
-				<div class="col-lg-3 col-sm-6">
-
-				</div>
-
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget">
-						<h2>Important Links</h2>
-						<ul>
-							<li><a href="category.html">Products</a></li>
-							<li><a href="hair-types.html">Hair Types</a></li>
-							<li><a href="soon.html">About Us</a></li>
-							<li><a href="key-ingrediants.html">Key Ingrediants</a></li>
-							<li><a href="faq.html">FAQ</a></li>
-						</ul>
-
-					</div>
-				</div>
-
-
-
-
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget contact-widget">
-						<h2>Questions</h2>
-						<div class="con-info">
-							<span><i class="fas fa-map-marker-alt"></i></span>
-							<p>4 E Asmaa Fahmy,
-								Ard El Golf, Heliopolis,
-								Pharma Plaza Build
-								Cairo, Egypt. </p>
-						</div>
-						<div class="con-info">
-							<span> <i class="fab fa-whatsapp"></i></span>
-							<p>01222347852</p>
-						</div>
-
-						<div class="con-info">
-							<span><i class="fas fa-phone"></i></span>
-							<p>02 21825000 </p>
-						</div>
-						<div class="con-info">
-							<span><i class="fas fa-phone"></i></span>
-							<p> 02 21825001
-							</p>
-						</div>
-						<div class="con-info">
-							<span><i class="fas fa-envelope"></i></span>
-							<p> info@cristalegypt.com
-							</p>
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="social-links-warp">
-			<div class="container">
-				<div class="social-links">
-					<a href="https://www.instagram.com/zerofrizzegyptofficial/" class="instagram"><i
-							class="fab fa-instagram"></i><span>instagram</span></a>
-					<a href="https://www.facebook.com/zero.frizz.egypt/" target="_blank" class="facebook"><i
-							class="fab fa-facebook"></i><span>facebook</span></a>
-				</div>
-
-				<p class="text-white text-center mt-5"> &copy;
-					<script>document.write(new Date().getFullYear());</script> Gem Cosmetics
-				</p>
-
-			</div>
-		</div>
-	</section>
-	<!-- Footer section end -->
-
-	<!--====== Javascripts & Jquery ======-->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.slicknav.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.nicescroll.min.js"></script>
-	<script src="js/jquery.zoom.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/main.js"></script>
-
-</body>
-
+    <!--====== Javascripts & Jquery ======-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
